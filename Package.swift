@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/argentlabs/web3.swift", from:"1.6.0"),
-        .package(url: "https://github.com/tkey/curvelib.swift", exact: "1.0.1"),
+        .package(url: "https://github.com/tkey/curvelib.swift", exact: "2.0.0"),
         .package(url: "https://github.com/vapor/jwt-kit.git", from: "4.0.0"),
         .package(url: "https://github.com/tkey/mpc-core-kit-swift", branch: "update_dependencies"),
     ],
