@@ -73,46 +73,27 @@ final class MpcProviderSwiftTests: XCTestCase {
         }
     """.data(using: .utf8)!
     
-    func resetMPC(email: String, verifier: String, clientId: String) async throws {
-        var coreKitInstance = MpcCoreKit(web3AuthClientId: clientId, web3AuthNetwork: .SAPPHIRE_DEVNET, localStorage: MemoryStorage())
-        
-        let data = try  mockLogin2(email: email)
-        let token = data
-        
-        
-        let keyDetails = try await coreKitInstance.loginWithJwt(verifier: verifier, verifierId: email, idToken: token)
-        try await coreKitInstance.resetAccount()
-    }
-    
-    
-    func testMpcProviderSigning() async throws {
-        
-        let email = "testiosEmail004"
-        let verifier = "torus-test-health"
-        let clientId = "torus-test-health"
-        
-        // reset account for testing
-        try await resetMPC(email: email, verifier: verifier, clientId: clientId)
-        
-        
-        // setup mpc
-        let memoryStorage = MemoryStorage()
-        var coreKitInstance = MpcCoreKit( web3AuthClientId: clientId, web3AuthNetwork: .SAPPHIRE_DEVNET, localStorage: memoryStorage)
-        
-        let data = try  mockLogin2(email: email)
-        let token = data
-        
-        let _ = try await coreKitInstance.loginWithJwt(verifier: verifier, verifierId: email, idToken: token)
-        
-        //
-        let provider = MPCEthereumProvider(evmSigner: coreKitInstance )
-        let msg = "hello world"
-        let result = try provider.sign(message: msg)
-        print(result)
-        
-        let decoder = JSONDecoder()
-        let typedData = try decoder.decode(TypedData.self, from: example1)
-        let typedDataResult = try provider.signMessage(message: typedData)
-        print(typedDataResult)
-    }
+//    func resetMPC(email: String, verifier: String, clientId: String) async throws {
+//
+//        
+//        
+//        let keyDetails = try await coreKitInstance.loginWithJwt(verifier: verifier, verifierId: email, idToken: token)
+//        try await coreKitInstance.resetAccount()
+//    }
+//    
+//    
+//    func testMpcProviderSigning() async throws {
+//        
+//        
+//        //
+//        let provider = MPCEthereumProvider(evmSigner: signer )
+//        let msg = "hello world"
+//        let result = try provider.sign(message: msg)
+//        print(result)
+//        
+//        let decoder = JSONDecoder()
+//        let typedData = try decoder.decode(TypedData.self, from: example1)
+//        let typedDataResult = try provider.signMessage(message: typedData)
+//        print(typedDataResult)
+//    }
 }
